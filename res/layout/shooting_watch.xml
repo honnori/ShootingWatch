@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jp.co.takes.apps.shootingwatch.ShoRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/ShoLayout1"
+    android:layout_width="532dp"
+    android:layout_height="270dp"
+    android:layout_gravity="center"
+    android:background="@drawable/showatch_bg" >
+    <ImageView
+        android:id="@+id/display1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/d0" />
+
+    <ImageView 
+        android:id="@+id/display2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="325dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/d0"/>
+
+    <ImageView 
+        android:id="@+id/colon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="352dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/colon" />
+    
+    <ImageView 
+        android:id="@+id/display3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="365dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/d0" />
+
+    <ImageView 
+        android:id="@+id/display4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="390dp"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/d0"/>
+
+    
+    <ImageView 
+        android:id="@+id/display5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="420dp"
+        android:layout_marginTop="55dp"
+        android:scaleType="center"
+        android:src="@drawable/sd0"/>
+
+    <ImageView 
+        android:id="@+id/display6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="442dp"
+        android:layout_marginTop="55dp"
+        android:scaleType="center"
+        android:src="@drawable/sd0"/>
+
+    <ImageView
+        android:id="@+id/bar_shoot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="92dp"
+        />
+    
+    <ImageView
+        android:id="@+id/bar_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="325dp"
+        android:layout_marginTop="92dp"
+        />
+    
+    <ImageView
+        android:id="@+id/bar_stop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="350dp"
+        android:layout_marginTop="90dp"
+        />
+
+    <ImageView
+        android:id="@+id/bar_max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="375dp"
+        android:layout_marginTop="90dp"
+        />
+    
+    <jp.co.takes.apps.shootingwatch.ShoButton
+        android:id="@+id/A_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="396dp"
+        android:layout_marginTop="155dp"
+        android:background="@drawable/sw_btn" />
+    
+    <jp.co.takes.apps.shootingwatch.ShoButton
+        android:id="@+id/B_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="300dp"
+        android:layout_marginTop="156dp"
+        android:background="@drawable/sw_btn"/>
+
+    <Button
+        android:id="@+id/select"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/s_btn" 
+        android:onClick="selectOnClick"/>
+
+    <Button
+        android:id="@+id/start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/s_btn"
+        android:onClick="startOnClick" />
+
+
+</jp.co.takes.apps.shootingwatch.ShoRelativeLayout>
