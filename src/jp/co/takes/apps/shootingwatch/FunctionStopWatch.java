@@ -1,7 +1,5 @@
 package jp.co.takes.apps.shootingwatch;
 
-import java.util.Calendar;
-
 import jp.co.takes.apps.shootingwatch.ShootingWatchActivity.Mode;
 import android.os.Handler;
 import android.view.View;
@@ -21,12 +19,17 @@ public class FunctionStopWatch implements Function {
 			timeCounter++;
 			// ディスプレイ表示
 			viewCountTime();
+			
+			// 10ms後に、コールバックメソッド（自メソッド）を実行するように設定
 			mHandler.postDelayed(mUpdateTimeTask, 10);
 		}
 	};
 
 	// タイマー状態フラグ
 	private boolean timer = false;
+
+	// カウンター
+	private long timeCounter = 0;
 
 	public FunctionStopWatch(ShootingWatchActivity act) {
 		super();
@@ -75,7 +78,6 @@ public class FunctionStopWatch implements Function {
 		this.stopCountTime();
 	}
 	
-	long timeCounter = 0;
 
 	/**
 	 * カウントタイムをディスプレイに表示する
@@ -83,25 +85,15 @@ public class FunctionStopWatch implements Function {
 	public void viewCountTime(){
 		
 		// 現在時刻を取得
-//		Calendar calendar = Calendar.getInstance();
-////		int hour = calendar.get(Calendar.HOUR_OF_DAY);
-//		int minute = calendar.get(Calendar.MINUTE);
-//		int second = calendar.get(Calendar.SECOND);
-//		int ms = calendar.get(Calendar.MILLISECOND);
-		
-		
 		final long totaltime = this.timeCounter *10;
-//		int hour = (int) (totaltime / (1000*60*60));
 		int minute = (int)(totaltime / (1000*60)%60);
 		int second = (int) (totaltime / 1000)%60;
 		int ms = (int)(totaltime % 1000);
-
 		
 		// ディスプレイ表示領域に時刻を設定
 		this.activity.setMainDisp(
 				Integer.parseInt(String.format("%02d", minute) + String.format("%02d", second)));
 		this.activity.setSubDisp(ms/10);
-		this.activity.viewColon(true);
 		
 	}
 	
@@ -109,12 +101,14 @@ public class FunctionStopWatch implements Function {
 	 * カウント開始
 	 */
 	private void startCountTime(){
+		
 		// 新たなハンドラを追加する前に、ハンドラにある既存のコールバックをすべて削除
-		mHandler.removeCallbacks(mUpdateTimeTask);
+		this.mHandler.removeCallbacks(this.mUpdateTimeTask);
 
 		// Handler に対し、" 10 ms 後に mUpdateTimeTask() を呼び出す
-		mHandler.postDelayed(mUpdateTimeTask, 10);
+		this.mHandler.postDelayed(this.mUpdateTimeTask, 10);
 		
+		// タイマー状態フラグをON
 		this.timer = true;
 		
 	}
@@ -123,7 +117,12 @@ public class FunctionStopWatch implements Function {
 	 * カウント停止
 	 */
 	private void stopCountTime(){
-		mHandler.removeCallbacks(mUpdateTimeTask);
+		
+		if (this.timer) {
+			// キューに溜まって待ち状態のコールバックイベントをキャンセルする
+			this.mHandler.removeCallbacks(this.mUpdateTimeTask);
+		}
+		// タイマー状態フラグをOFF
 		this.timer = false;
 	}
 
@@ -131,12 +130,17 @@ public class FunctionStopWatch implements Function {
 	 * カウントリセット
 	 */
 	private void resetCountTime(){
+		
+		// カウント停止
 		this.stopCountTime();
+		
+		// カウンターを初期化
 		this.timeCounter = 0;
 		
 		// ディスプレイ表示領域に時刻を設定
 		this.activity.setMainDisp(0);
 		this.activity.setSubDisp(0);
+		this.activity.viewColon(true);
 	}
 
 

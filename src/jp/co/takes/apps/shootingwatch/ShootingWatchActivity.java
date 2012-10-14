@@ -254,7 +254,6 @@ public class ShootingWatchActivity extends Activity implements OnTouchListener {
 
 		int count = event.getPointerCount();
 		Log.d("TouchEvent", "event.getPointerCount() : count = " + count);
-//		int id = event.getPointerId(pointerIndex);
 
 //		Log.d("TouchEvent", "getAction()" + "");
 
@@ -263,14 +262,24 @@ public class ShootingWatchActivity extends Activity implements OnTouchListener {
 		case MotionEvent.ACTION_POINTER_DOWN:
 			Log.d("TouchEvent", "getAction()" + "ACTION_DOWN" + " : id = " + id);
 			
-			// 既に片方が
-			
 			// ボタンダウン時にカウントアップする
-			this.buttonOnClick(button);
+//			this.buttonOnClick(button);
+			for (int i=0; i < count; i++) {
+				id = event.getPointerId(i);
+				// MOVEイベントもある条件を満たした場合はクリックとみなす
+				// 擦り連打対応のため
+				if(this.multiTapClickEvent(event, id, (ShoButton)view)) {
+					this.buttonOnClick(button);
+				}
+			}
 			break;
 		case MotionEvent.ACTION_UP:
 		case MotionEvent.ACTION_POINTER_UP:
 			Log.d("TouchEvent", "getAction()" + "ACTION_UP" + " : id = " + id);
+			
+			// ボタン押下フラグを解除
+			this.buttonStatusList[id] = false;
+			
 			break;
 		case MotionEvent.ACTION_MOVE:
 //			Log.d("TouchEvent", "getAction()" + "ACTION_MOVE" + " : id = " + id);
@@ -397,6 +406,8 @@ public class ShootingWatchActivity extends Activity implements OnTouchListener {
 		case MotionEvent.ACTION_UP:
 		case MotionEvent.ACTION_POINTER_UP:
 			Log.d("TouchEvent", "getAction()" + "■ACTION_UP");
+			// ボタン押下フラグを解除
+			this.buttonStatusList[id] = false;
 			break;
 		case MotionEvent.ACTION_MOVE:
 //			Log.d("TouchEvent", "getAction()" + "■ACTION_MOVE");
